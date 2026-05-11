@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Website</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: #f4f4f9;
+            color: #333;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .btn-blue {
+            background: #3b82f6;
+        }
+
+        .btn-red {
+            background: #ef4444;
+        }
+
+        .btn-yellow {
+            background: #eab308;
+            color: black;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <!-- ======================================================== -->
+    <!-- ETS INTEGRATION SCRIPT: The only code needed to connect! -->
+    <!-- ======================================================== -->
+    <script>
+        // 1. Catch standard Javascript Errors (ReferenceError, TypeError, etc.)
+        window.onerror = function (message, source, lineno, colno, error) {
+            const errorData = {
+                appName: "Live-HTML-Website", // A unique name for this specific website
+                message: message,
+                stackTrace: error ? error.stack : `Error at ${source}:${lineno}:${colno}`,
+                severity: "high"
+            };
+
+            console.log("🚨 Crash Intercepted! Sending silently to ETS Dashboard...", errorData);
+
+            fetch('http://localhost:5000/api/errors', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(errorData)
+            }).catch(e => console.error("Could not reach ETS server (Is backend running?)", e));
+
+            return false; // Let it still show up in the browser console for debugging
+        };
+
+        // 2. Catch failed API calls and broken Promises
+        window.addEventListener('unhandledrejection', function (event) {
+            const errorData = {
+                appName: "Live-HTML-Website",
+                message: "Unhandled Promise Rejection: " + (event.reason?.message || event.reason),
+                stackTrace: event.reason?.stack || "No stack trace available",
+                severity: "critical" // Marking API failures as critical!
+            };
+
+            console.log("🚨 Network Crash Intercepted! Sending silently to ETS Dashboard...", errorData);
+
+            fetch('http://localhost:5000/api/errors', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(errorData)
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to My Website</h1>
+        <p>This is a completely separate HTML file. It has no idea what React is. It is just a standard website.</p>
+        <p>Try clicking the buttons below to trigger real crashes, and watch your ETS dashboard!</p>
+
+        <br>
+
+        <button class="btn btn-blue" onclick="triggerReferenceError()">Trigger ReferenceError</button>
+        <button class="btn btn-red" onclick="triggerTypeError()">Trigger TypeError</button>
+        <button class="btn btn-yellow" onclick="triggerFetchError()">Trigger Network Error</button>
+    </div>
+
+    <!-- THE BUGS (Intentional bad code) -->
+    <script>
+        function triggerReferenceError() {
+            // BUG: Trying to call a function that doesn't exist!
+            thisFunctionDoesNotExist();
+        }
+
+        function triggerTypeError() {
+            // BUG: Trying to read a property of null!
+            const userProfile = null;
+            console.log(userProfile.name);
+        }
+
+        function triggerFetchError() {
+            // BUG: Fetching a broken URL and not catching the error!
+            fetch('https://api.this-fake-website-is-down.com/data')
+                .then(res => res.json())
+                .then(data => console.log(data));
+            // Forgot to add .catch()! This causes an unhandled rejection.
+        }
+    </script>
+</body>
+
+</html>

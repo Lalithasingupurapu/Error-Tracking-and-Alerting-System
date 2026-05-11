@@ -1,0 +1,20 @@
+# ==============================================================================
+# REQUIREMENTS FOR ERROR TRACKING SYSTEM (OPTION 1: JAVASCRIPT/NODE.JS STACK)
+# ==============================================================================
+
+# Important Note:
+# In Node.js projects, dependencies are managed natively by the 'package.json' 
+# file rather than a 'requirements.txt' file. 
+# However, this file is provided for your reference to understand our exact stack.
+
+# CORE PACKAGES
+express       # The highly-efficient web framework for receiving error data
+mongoose      # Our database library (makes MongoDB feel like simple JavaScript objects)
+cors          # Security middleware (allows our React frontend to securely talk to this API)
+dotenv        # Securely loads environment variables like API keys from a hidden .env file
+zod           # Data validation library (similar to Python's Pydantic)
+morgan        # HTTP request logger middleware for node.js
+
+# INSTALLATION COMMAND
+# To install all of these via terminal, simply run:
+# npm install express mongoose cors dotenv zod morgan
