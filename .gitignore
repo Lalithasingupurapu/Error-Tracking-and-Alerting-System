@@ -1,2 +1,55 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage
+.nyc_output
+*.lcov
+
+# Dependency directories
 node_modules/
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional cache
+.npm
+.eslintcache
+.stylelintcache
+
+# dotenv files
 .env
+.env.* 
+!.env.example
+
+# Build outputs
+dist
+build
+.next
+out
+.nuxt
+.output
+.vuepress/dist
+.docusaurus
+
+# Vite
+.vite/
+
+# OS / Editor
+.DS_Store
+.vscode/
