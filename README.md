@@ -11,6 +11,17 @@ A centralized full-stack application that captures, tracks, and manages real-tim
 - ✅ **Mark as Resolved** – Helps developers track fixed issues
 - 🎨 **Modern UI** – Responsive React dashboard with clean design
 
+## 📸 Screenshots
+
+### 1. Main Dashboard (Empty State)
+![Dashboard Empty State](./assets/dashboard-empty.png)
+
+### 2. Active Errors
+![Active Errors](./assets/dashboard-errors.png)
+
+### 3. Smart Deduplication (Occurrences Counter)
+![Smart Deduplication](./assets/dashboard-grouped.png)
+
 ## 🛠 Tech Stack
 - **Frontend**: React.js, Vite, CSS
 - **Backend**: Node.js, Express.js
